@@ -6,6 +6,7 @@ import (
 	"fmt"
 	"net/http"
 	"os"
+	"sort"
 	"time"
 )
 
@@ -56,6 +57,27 @@ func main() {
 		fmt.Fprintf(os.Stderr, "error decoding JSON: %v\n", err)
 		os.Exit(1)
 	}
+
+	// Collect unique UserIDs using a map
+	unique := make(map[int]struct{})
+	for _, p := range posts {
+		unique[p.UserID] = struct{}{}
+	}
+
+	var ids []int
+
+	// unique UserIDs
+	for id := range unique {
+		ids = append(ids, id)
+	}
+
+	sort.Ints(ids)
+
+	// Print sorted unique UserIDs
+	for _, id := range ids {
+		fmt.Println(id)
+	}
+
 
 	// Print JSON back to stdout (pretty-printed)
 	pretty, err := json.MarshalIndent(posts, "", "  ")
