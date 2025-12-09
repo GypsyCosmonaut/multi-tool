@@ -127,7 +127,9 @@ func main() {
 
 	// Print extracted unique IPs
 	for _, ip := range sortedIPs {
-		fmt.Println(ip)
+		if isPrivate(ip) {
+			fmt.Println(ip)
+		}
 	}
 
 	// ---- 5. Delete the file ----
