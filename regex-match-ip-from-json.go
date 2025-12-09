@@ -48,7 +48,7 @@ func isPrivate(ip string) bool {
 	}
 
 	for _, p := range privateCIDRs {
-		if len(ip) >= len(p) && ip[:len(p)] == p {
+		if ip[:len(p)] == p {
 			return true
 		}
 	}
