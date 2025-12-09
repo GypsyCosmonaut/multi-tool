@@ -54,7 +54,7 @@ func isPrivate(ip string) bool {
 	}
 
 	// Check 172.16.0.0 – 172.31.255.255
-	if len(ip) >= 4 && ip[:3] == "172" {
+	if ip[:3] == "172" {
 		var a, b, c, d int
 		fmt.Sscanf(ip, "%d.%d.%d.%d", &a, &b, &c, &d)
 		if a == 172 && b >= 16 && b <= 31 {
